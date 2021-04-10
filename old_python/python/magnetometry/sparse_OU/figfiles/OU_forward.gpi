@@ -1,0 +1,13 @@
+set term png background "white"
+set out "OU_forward.png"
+set title "Homodyne forward trajectory"
+set autoscale xfix
+set autoscale yfix
+set autoscale cbfix
+set xlabel "Time"
+set ylabel "\delta_s"
+set view map
+set pm3d explicit
+set pm3d interpolate 0,0
+splot "OU_forward_data.txt" matrix nonuniform with pm3d,\
+"OU_reservoir_trajectory.txt" using 1:2:(0) with lines lw 2 lt rgb "green"

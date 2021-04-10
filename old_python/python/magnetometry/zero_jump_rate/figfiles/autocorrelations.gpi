@@ -1,0 +1,10 @@
+set term png background "white"
+set out "autocorrelations.png"
+set title "Autocorrelation functions"
+set autoscale yfix
+set autoscale xfix
+set autoscale cbfix
+set xlabel "Correlation time"
+set ylabel "Autocorrelation amplitude"
+plot "autocorrelations.txt" using 1:2 with lines title "B-field state", \
+"autocorrelations.txt" using 1:3 with lines title "PQS signal"
