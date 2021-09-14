@@ -68,6 +68,7 @@ int main(int argc, char* argv[]){
 	if(argc == 4) seed = atoi(argv[3]);
 	arma::arma_rng::set_seed(seed);
 	
+	
 	// Main body
 	const auto [r_up, r_down] = ehrenfest_chain(N, base_rate);
 	const auto [c_1, c_2, c_3, c, H, J_up, J_down] = make_operators(N, g, kappa, kappa_1, delta_c, delta_q, beta, gamma_dec, gamma_phi, LOPhi, r_up, r_down);
@@ -157,6 +158,6 @@ int main(int argc, char* argv[]){
 	std::ofstream P_f_max_file(data_folder + "P_f_max.txt");
 	P_f_max.save(P_f_max_file, arma::raw_ascii);
 	P_f_max_file.close();
-	
+//*/	
 	return 0;
 }

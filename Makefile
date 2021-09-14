@@ -1,7 +1,7 @@
-SHELL := bash
-CPPFLAGS = -Wall -O3 -std=c++17
+SHELL = bash
+CXXFLAGS = -Wall -O3 -std=c++17
 LDLIBS = -larmadillo -lm 
-CC = g++
+CC = g++-7
 
 OBJECTS = main.o ehrenfest_chain.o make_operators.o choi_jamiolkowski.o homodyne_emission.o homodyne_PQS.o
 SOURCES = main.cpp ehrenfest_chain.cpp make_operators.cpp choi_jamiolkowski.cpp homodyne_emission.cpp homodyne_PQS.cpp
@@ -23,15 +23,12 @@ beta_images:main beta_images_variables.txt
 		for bb in {1..9..2}; \
 			do \
 			sed -i "16s/.*/$$b.$$bb/g" beta_images_variables.txt; \
-			for i in {1..100}; \
-				do \
-					folder_name="beta_images/beta_$$b.$$bb/run_$$i" \
-					index=$$((index+1)); \
-					./$< beta_images_variables.txt $$folder_name `sed "$${index}q;d" seeds_beta_figures.txt`; \
-				done \
+				folder_name="beta_images/beta_$$b.$$bb" \
+				index=$$((index+1)); \
+				./$< beta_images_variables.txt $$folder_name `sed "$${index}q;d" seeds_beta_figures.txt`; \
 			done \
 		done
-	python3 function_of_beta_curve.py
+	#python3 function_of_beta_curve.py
 
 example_images:main example_images_variables.txt
 	#The integer at the end here is the seed

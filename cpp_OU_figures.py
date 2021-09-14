@@ -47,6 +47,27 @@ for i in range(len(P_max)):
     P_f_max[i] = delta_q[int(P_f_max[i])]
 
 
+PQS_weighted_averages = [np.average(delta_q, weights = weights) for weights in P.T]
+PQS_weighted_variances = np.array([(weights * (delta_q - pdf_mean)**2).sum() for weights, pdf_mean in zip(P.T, PQS_weighted_averages)])
+averaged_widths = np.mean(PQS_weighted_variances)**0.5
+errorbar = true_state[index_frames_in_emission] - P_max
+mean_errorbar = ((errorbar**2).mean())**0.5
+
+forward_weighted_averages = [np.average(delta_q, weights = weights) for weights in P_f.T]
+forward_weighted_variances = np.array([(weights * (delta_q - pdf_mean)**2).sum() for weights, pdf_mean in zip(P_f.T, forward_weighted_averages)])
+averaged_widths_forward = (forward_weighted_variances.mean())**0.5
+errorbar_forward = true_state[index_frames_in_emission] - P_f_max
+mean_errorbar_forward = ((errorbar_forward**2).mean())**0.5
+
+
+with open(results_folder + 'width_vs_errorbar.txt', 'w') as f:
+        f.write('PQS Averaged width = {}\n'.format(averaged_widths))
+        f.write('PQS Mean errorbar = {}\n'.format(mean_errorbar))
+        f.write('\n')
+        f.write('Forward Averaged width = {}\n'.format(averaged_widths_forward))
+        f.write('Forward Mean errorbar = {}\n'.format(mean_errorbar_forward))
+
+
 clevels = 100
 #Forward-only probability density plot
 plt.figure()
@@ -135,27 +156,6 @@ plt.xticks()
 plt.ylim((0, max(np.max(PQS_heights)*1.02 , np.max(forward_heights)*1.02)))
 plt.legend()
 plt.savefig(results_folder + 'forward_histogram' + image_type, transparent=True, bbox_inches='tight')
-
-
-PQS_weighted_averages = [np.average(delta_q, weights = weights) for weights in P.T]
-PQS_weighted_variances = np.array([(weights * (delta_q - pdf_mean)**2).sum() for weights, pdf_mean in zip(P.T, PQS_weighted_averages)])
-averaged_widths = np.mean(PQS_weighted_variances)**0.5
-errorbar = true_state[index_frames_in_emission] - P_max
-mean_errorbar = ((errorbar**2).mean())**0.5
-
-forward_weighted_averages = [np.average(delta_q, weights = weights) for weights in P_f.T]
-forward_weighted_variances = np.array([(weights * (delta_q - pdf_mean)**2).sum() for weights, pdf_mean in zip(P_f.T, forward_weighted_averages)])
-averaged_widths_forward = (forward_weighted_variances.mean())**0.5
-errorbar_forward = true_state[index_frames_in_emission] - P_f_max
-mean_errorbar_forward = ((errorbar_forward**2).mean())**0.5
-
-
-with open(results_folder + 'width_vs_errorbar.txt', 'w') as f:
-        f.write('PQS Averaged width = {}\n'.format(averaged_widths))
-        f.write('PQS Mean errorbar = {}\n'.format(mean_errorbar))
-        f.write('\n')
-        f.write('Forward Averaged width = {}\n'.format(averaged_widths_forward))
-        f.write('Forward Mean errorbar = {}\n'.format(mean_errorbar_forward))
 
 
 plt.figure()

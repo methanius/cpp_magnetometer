@@ -64,6 +64,7 @@ std::tuple< arma::sp_cx_mat, arma::sp_cx_mat, arma::sp_cx_mat, arma::sp_cx_mat, 
                 J_down.submat(2 * (i + 1), 2 * i, 2 * (i + 1) + 1, 2 * i + 1).eye();
                 J_down.submat(2 * (i + 1), 2 * i, 2 * (i + 1) + 1, 2 * i + 1) *= sqrt(r_down.at(i));
         }
+
 	
         return {c_1, c_2, c_3, c, H, J_up, J_down};
 }
