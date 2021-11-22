@@ -140,7 +140,7 @@ ax.errorbar(betas, PQS_MSEs, PQS_MSE_errorbars, fmt = 'sk', capsize = 1.3, eline
 ax.errorbar(betas, filtering_MSEs, filtering_MSE_errorbars, fmt = '^b', capsize = 1.3, elinewidth = 0.4, ecolor = 'black', label = 'Filtering RMSE')
 """
 ax.legend(loc = 'lower right', frameon = False)
-ax.set_xlabel(r'Coherent drive strength $(\beta / \sqrt{\gamma})$', )
+ax.set_xlabel(r'Coherent drive strength $\beta$ (in units of $\sqrt{\gamma})$', )
 ax.set_ylabel(r'Error estimates $\sqrt{(\Delta_n^2 / \gamma^2)}$')
 ax.set_ylim(bottom = 0)
 plt.savefig('article/drive_strength_figure.pdf', bbox_inches='tight')

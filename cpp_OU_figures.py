@@ -9,7 +9,13 @@ plt.rc("axes", labelsize=18, titlesize=22)   # skriftstørrelse af `xlabel`, `yl
 plt.rc("xtick", labelsize=16, top=True, direction="in")  # skriftstørrelse af ticks, vis også ticks øverst og vend ticks indad
 plt.rc("ytick", labelsize=16, right=True, direction="in") # samme som ovenstående
 plt.rc("legend", fontsize=16) # skriftstørrelse af figurers legends
+
 dpi = 500
+colormap = 'Blues'
+MLE_line_color = 'darkblue'
+True_field_line_color = 'crimson' #'firebrick'
+contourmax = 0.475
+clevels = 25 #100
 
 
 image_type = '.pdf'
@@ -68,14 +74,13 @@ with open(results_folder + 'width_vs_errorbar.txt', 'w') as f:
         f.write('Forward Mean errorbar = {}\n'.format(mean_errorbar_forward))
 
 
-clevels = 100
 #Forward-only probability density plot
 plt.figure()
-forward_fig = plt.contourf(t_PQS, delta_q, P_f, clevels)
+forward_fig = plt.contourf(t_PQS, delta_q, P_f, clevels, cmap = colormap, vmax = contourmax)
 for c in forward_fig.collections:
     c.set_edgecolor("face")
-plt.plot(t_PQS, P_f_max, color='green', label='MLE')
-plt.plot(t_emission, true_state, color='red', label='True field')
+plt.plot(t_PQS, P_f_max, color=MLE_line_color, ls = '-', label='MLE')
+plt.plot(t_emission, true_state, color=True_field_line_color, label='True field')
 plt.ylabel('$\Delta_n / \gamma$')
 plt.xlabel('$\gamma t$')
 plt.yticks()
@@ -87,11 +92,11 @@ plt.savefig(results_folder + 'filtering' + image_type, transparent=True, bbox_in
 
 #PQS probability density plot
 plt.figure()
-PQS_fig = plt.contourf(t_PQS, delta_q, P, clevels)
+PQS_fig = plt.contourf(t_PQS, delta_q, P,clevels, cmap = colormap, vmax = contourmax)
 for c in PQS_fig.collections:
     c.set_edgecolor("face")
-plt.plot(t_PQS, P_max, color='green', label='MLE')
-plt.plot(t_emission, true_state, color='red', label='True field')
+plt.plot(t_PQS, P_max, color=MLE_line_color, label='MLE')
+plt.plot(t_emission, true_state, color=True_field_line_color, label='True field')
 plt.ylabel('$\Delta_n / \gamma$')
 plt.xlabel('$\gamma t$')
 plt.yticks()
@@ -105,7 +110,7 @@ plt.figure()
 forward_fig = plt.contourf(t_PQS, delta_q, P_b, clevels)
 for c in forward_fig.collections:
     c.set_edgecolor("face")
-plt.plot(t_emission, true_state, color='red', label='True field')
+plt.plot(t_emission, true_state, color=True_field_line_color, label='True field')
 plt.ylabel('$\Delta_n / \gamma$')
 plt.xlabel('$\gamma t$')
 plt.yticks()
