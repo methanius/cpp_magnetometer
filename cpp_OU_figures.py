@@ -15,7 +15,7 @@ colormap = 'Blues'
 MLE_line_color = 'darkblue'
 True_field_line_color = 'crimson' #'firebrick'
 contourmax = 0.475
-clevels = 25 #100
+clevels = 100
 
 
 image_type = '.pdf'
