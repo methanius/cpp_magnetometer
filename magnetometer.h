@@ -1,5 +1,5 @@
 #ifndef HAVE_MAGNETOMETER
-#define HAVE_MAGNETOMER
+#define HAVE_MAGNETOMETER
 #include <iostream>
 #include <vector>
 #include <tuple>
