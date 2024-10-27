@@ -1,6 +1,8 @@
 SHELL = bash
 CXXFLAGS = -Wall -O3 -std=c++17
 LDLIBS = -larmadillo -lm 
+CXX = g++
+CC = g++
 
 OBJECTS = main.o ehrenfest_chain.o make_operators.o choi_jamiolkowski.o homodyne_emission.o homodyne_PQS.o
 SOURCES = main.cpp ehrenfest_chain.cpp make_operators.cpp choi_jamiolkowski.cpp homodyne_emission.cpp homodyne_PQS.cpp
