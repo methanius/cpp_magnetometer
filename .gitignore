@@ -4,3 +4,6 @@
 
 # Object files
 *.o
+
+# Resulting executable
+main
